@@ -6,7 +6,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 引入router
 import router from '@/router/index.js'
 // 引入axios
-import axios from 'axios'
+import axios from '@/api/axios.js'
 Vue.prototype.axios = axios
 Vue.use(element)
 
