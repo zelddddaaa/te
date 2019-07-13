@@ -38,8 +38,8 @@ export default {
       checked: true,
       // 表单传输数据对象
       LoginForm: {
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       Loginrules: {
         mobile: [

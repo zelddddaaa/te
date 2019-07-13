@@ -27,7 +27,21 @@ const router = new VueRouter({
     }]
   },
   // 404设置在所有路由之后
-  { name: '404', path: '*', component: NOTFOUND }
+  {
+    name: '404',
+    path: '*',
+    component: NOTFOUND
+  }
   ]
+})
+// 设置前置守卫
+router.beforeEach((to, from, next) => {
+  // 路由是否是/login
+  if (to.path === '/login') return next()
+  // 路由不会login后,是否携带sessionstorage
+  const user = window.sessionStorage.getItem('te')
+  if (user) return next()
+  // 路由未携带sessionstorage
+  next('/login')
 })
 export default router
