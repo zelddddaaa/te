@@ -60,6 +60,8 @@ export default {
           this.axios
             .post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.LoginForm)
             .then(res => {
+              // 登录成功后,设置sessionStorage
+              window.sessionStorage.setItem('te', JSON.stringify(res.data.data))
               this.$router.push('/')
             })
             .catch(() => {

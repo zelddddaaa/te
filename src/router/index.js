@@ -5,12 +5,29 @@ import VueRouter from 'vue-router'
 import login from '@/views/login/index.vue'
 // 引入主页路由组件
 import home from '@/views/home/index.vue'
+// 引入home子路由
+import welcome from '@/views/welcome/index.vue'
+// 引入404子路由
+import NOTFOUND from '@/views/404/NOTFOUND.vue'
 vue.use(VueRouter)
 // 创建路由对象
 const router = new VueRouter({
-  routes: [
-    { name: 'login', path: '/login', component: login },
-    { name: 'home', path: '/', component: home }
+  routes: [{
+    name: 'login',
+    path: '/login',
+    component: login
+  },
+  {
+    path: '/',
+    component: home,
+    children: [{
+      name: 'welcome',
+      path: '/',
+      component: welcome
+    }]
+  },
+  // 404设置在所有路由之后
+  { name: '404', path: '*', component: NOTFOUND }
   ]
 })
 export default router
