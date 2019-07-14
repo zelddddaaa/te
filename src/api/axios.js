@@ -7,6 +7,7 @@ const instance = axios.create({
 })
 // 请求拦截,发出请求前,触发
 instance.interceptors.request.use(config => {
+  // 在发送请求之前做些什么
   const user = window.sessionStorage.getItem('te')
   if (user) {
     config.headers = {
@@ -16,6 +17,7 @@ instance.interceptors.request.use(config => {
   }
   return config
 }, error => {
+  // 处理请求错误
   return Promise.reject(error)
 })
 // 响应拦截
