@@ -55,19 +55,16 @@ export default {
   },
   methods: {
     login () {
-      this.$refs.LoginForm.validate(valid => {
+      // async,await;try{} catch(){}
+      this.$refs.LoginForm.validate(async valid => {
         if (valid) {
-          this.axios
-            .post('authorizations', this.LoginForm)
-            .then(res => {
-              // 登录成功后,设置sessionStorage
-              window.sessionStorage.setItem('te', JSON.stringify(res.data.data))
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // element组件消息提示
-              this.$message.error('手机号或')
-            })
+          try {
+            const res = await this.axios.post('authorizations', this.LoginForm)
+            window.sessionStorage.setItem('te', res.data.data)
+            this.$router.push('/')
+          } catch (err) {
+            this.$message.error('手机号或者验证码错误')
+          }
         }
       })
     }
