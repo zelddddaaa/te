@@ -6,7 +6,7 @@
       <div class="logo" :class="{close:collapse}"></div>
       <!-- 左侧按钮 -->
       <el-menu
-        default-active="/"
+        :default-active="$route.path"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -20,7 +20,7 @@
           <i class="el-icon-s-home"></i>
           <span slot="title">首页</span>
         </el-menu-item>
-        <el-menu-item index="/artical">
+        <el-menu-item index="/article">
           <i class="el-icon-document"></i>
           <span slot="title">内容管理</span>
         </el-menu-item>
@@ -53,21 +53,16 @@
         <span class="el-icon-s-fold" @click="check()"></span>
         <span class="text">江苏传智播客科技教育有限公司</span>
         <!-- 右侧下拉菜单 -->
-        <el-dropdown style="float:right">
+        <el-dropdown style="float:right" @command="handleCommand">
           <!-- 下拉点击区域 -->
           <span class="el-dropdown-link">
-            <img
-              src="../../assets/images/avatar.jpg"
-              width="30px"
-              height="30px"
-              style="vertical-align:middle"
-            />
-            <b style="padding-left:5px; vertical-align:middle">黑马小哥</b>
+            <img :src="avatar" width="30px" height="30px" style="vertical-align:middle" />
+            <b style="padding-left:5px; vertical-align:middle">{{name}}</b>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" command="setting">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" command="loginout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -84,13 +79,30 @@
 export default {
   data () {
     return {
-      collapse: false
+      collapse: false,
+      avatar: '',
+      name: ''
     }
   },
   methods: {
     check () {
       this.collapse = !this.collapse
+    },
+    setting () {
+      this.$router.push('/setting')
+    },
+    loginout () {
+      this.$router.push('/login')
+    },
+    handleCommand (command) {
+      this[command]()
     }
+  },
+  created () {
+    // 不能是用逗号分隔
+    const user = JSON.parse(window.sessionStorage.getItem('te'))
+    this.avatar = user.photo
+    this.name = user.name
   }
 }
 </script>
@@ -111,19 +123,20 @@ export default {
         140px auto;
     }
     .close {
-      background: url(../../assets/images/logo_admin_01.png) no-repeat center / 36px auto;
+      background: url(../../assets/images/logo_admin_01.png) no-repeat center /
+        36px auto;
     }
   }
   .my-header {
     line-height: 60px;
     border-bottom: 1px solid #ddd;
-    .el-icon-s-fold{
+    .el-icon-s-fold {
       font-size: 25px;
       vertical-align: middle;
     }
-    .text{
+    .text {
       vertical-align: middle;
-      padding-left: 10px
+      padding-left: 10px;
     }
   }
 }

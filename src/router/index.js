@@ -9,6 +9,8 @@ import home from '@/views/home/index.vue'
 import welcome from '@/views/welcome/index.vue'
 // 引入404子路由
 import NOTFOUND from '@/views/404/NOTFOUND.vue'
+// 引入article子路由
+import article from '@/views/article'
 vue.use(VueRouter)
 // 创建路由对象
 const router = new VueRouter({
@@ -24,6 +26,10 @@ const router = new VueRouter({
       name: 'welcome',
       path: '/',
       component: welcome
+    }, {
+      name: 'article',
+      path: '/article',
+      component: article
     }]
   },
   // 404设置在所有路由之后

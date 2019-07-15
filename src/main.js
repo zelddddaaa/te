@@ -7,6 +7,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from '@/router/index.js'
 // 引入axios
 import axios from '@/api/axios.js'
+// 引入面包屑插件
+import components from '@/components/index.js'
+Vue.use(components)
 Vue.prototype.axios = axios
 Vue.use(element)
 

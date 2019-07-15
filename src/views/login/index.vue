@@ -60,7 +60,7 @@ export default {
         if (valid) {
           try {
             const res = await this.axios.post('authorizations', this.LoginForm)
-            window.sessionStorage.setItem('te', res.data.data)
+            window.sessionStorage.setItem('te', JSON.stringify(res.data.data))
             this.$router.push('/')
           } catch (err) {
             this.$message.error('手机号或者验证码错误')
