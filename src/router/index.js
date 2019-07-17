@@ -13,6 +13,8 @@ import NOTFOUND from '@/views/404/NOTFOUND.vue'
 import article from '@/views/article'
 // 引入images子路由组件
 import images from '@/views/images'
+// 引入publish子路由组件
+import publish from '@/views/publish'
 
 vue.use(VueRouter)
 // 创建路由对象
@@ -39,6 +41,11 @@ const router = new VueRouter({
     name: 'image',
     path: '/image',
     component: images
+  },
+  {
+    name: 'publish',
+    path: '/publish',
+    component: publish
   },
   // 404设置在所有路由之后
   {
