@@ -31,6 +31,7 @@ instance.interceptors.request.use(config => {
 })
 // 响应拦截
 instance.interceptors.response.use(response => response, error => {
+  // 防止错误响应内容为空报错
   if (error.response && error.response.status === 401) {
     location.hash = '#/login'
   }

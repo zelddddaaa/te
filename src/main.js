@@ -9,6 +9,8 @@ import router from '@/router/index.js'
 import axios from '@/api/axios.js'
 // 引入面包屑插件
 import components from '@/components/index.js'
+// 导入全局样式
+import '@/styles/index.less'
 Vue.use(components)
 Vue.prototype.axios = axios
 Vue.use(element)

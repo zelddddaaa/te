@@ -11,6 +11,9 @@ import welcome from '@/views/welcome/index.vue'
 import NOTFOUND from '@/views/404/NOTFOUND.vue'
 // 引入article子路由
 import article from '@/views/article'
+// 引入images子路由组件
+import images from '@/views/images'
+
 vue.use(VueRouter)
 // 创建路由对象
 const router = new VueRouter({
@@ -31,6 +34,11 @@ const router = new VueRouter({
       path: '/article',
       component: article
     }]
+  },
+  {
+    name: 'image',
+    path: '/image',
+    component: images
   },
   // 404设置在所有路由之后
   {
