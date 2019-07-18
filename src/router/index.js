@@ -35,18 +35,20 @@ const router = new VueRouter({
       name: 'article',
       path: '/article',
       component: article
-    }]
+    },
+    {
+      name: 'image',
+      path: '/image',
+      component: images
+    },
+    {
+      name: 'publish',
+      path: '/publish',
+      component: publish
+    }
+    ]
   },
-  {
-    name: 'image',
-    path: '/image',
-    component: images
-  },
-  {
-    name: 'publish',
-    path: '/publish',
-    component: publish
-  },
+
   // 404设置在所有路由之后
   {
     name: '404',
