@@ -32,9 +32,9 @@
           </div>
           <!-- 三图 -->
           <div v-if="articleForm.cover.type === 3">
-            <my-image></my-image>
-            <my-image></my-image>
-            <my-image></my-image>
+            <my-image v-model="articleForm.cover.images[0]"></my-image>
+            <my-image v-model="articleForm.cover.images[1]"></my-image>
+            <my-image v-model="articleForm.cover.images[2]"></my-image>
           </div>
         </el-form-item>
         <!-- 频道 -->
