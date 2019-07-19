@@ -104,6 +104,9 @@ export default {
     openDialog () {
       // 显示对话框
       this.dialogVisible = true
+      // 清除上次数据,重新选择
+      this.uploadImageUrl = null
+      this.selectedImageUrl = null
       // 渲染图片素材
       this.getImages()
     },
@@ -115,7 +118,7 @@ export default {
       this.images = data.results
       this.total = data.total_count
     },
-    // 图片对号,排他
+    // 图片打对号,排他
     selectedImage (url) {
       this.selectedImageUrl = url
     },
@@ -181,6 +184,17 @@ export default {
     display: block;
     // 图片填充的规则，等比例缩放 完整显示在容器内
     object-fit: contain;
+  }
+}
+//图片按钮
+.img-btn {
+  width: 150px;
+  height: 150px;
+  border: 1px dashed #ddd;
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 }
 </style>

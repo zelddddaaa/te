@@ -4,7 +4,7 @@
     <el-card>
       <!-- 头部插槽 -->
       <div slot="header">
-        <my-bread>发布文章</my-bread>
+        <my-bread>{{articleId?'修改':'发布'}}文章</my-bread>
       </div>
       <!-- 表单 -->
       <el-form>
@@ -42,9 +42,14 @@
           <my-channel v-model="articleForm.channel_id"></my-channel>
         </el-form-item>
         <!-- 发表按钮 -->
-        <el-form-item>
-          <el-button type="primary">发表</el-button>
-          <el-button>存入草稿</el-button>
+        <el-form-item v-if="!articleId">
+          <el-button type="primary" @click="publish(true)">发表</el-button>
+          <el-button  @click="publish(false)">存入草稿</el-button>
+        </el-form-item>
+        <!-- 修改按钮 -->
+        <el-form-item v-else>
+          <el-button type="primary" @click="edit(true)">修改</el-button>
+          <el-button @click="edit(false)">存入草稿</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -87,7 +92,31 @@ export default {
         },
         // 频道
         channel_id: null
-        // 富文本编辑器内容
+      },
+      // 编辑文章的id
+      articleId: null
+    }
+  },
+  created () {
+    this.articleId = this.$route.query.id
+    // 修改文章时,触发获取文章方法
+    if (this.articleId) {
+      this.getArticle()
+    }
+  },
+  // 监听路由变化,从修改到发布,清空内部数据
+  watch: {
+    $route () {
+      this.articleId = null
+      this.articleForm = {
+        title: '',
+        content: '',
+        cover: {
+          type: 1,
+          // 数组长度 如果是单图为1  如果是三图为3
+          images: []
+        },
+        channel_id: null
       }
     }
   },
@@ -95,19 +124,29 @@ export default {
     // 单选按钮切换,清空内部images,从新展示
     changeType () {
       this.articleForm.cover.images = []
+    },
+    // 获取文章数据
+    async getArticle () {
+      const { data: { data } } = await this.axios.get('articles/' + this.articleId)
+      this.articleForm = data
+    },
+    // 发表
+    async publish (draft) {
+      await this.axios.post(`articles?draft=${draft}`, this.articleForm)
+      this.$message.success(draft ? '发表成功' : '存入草稿成功')
+      this.$router.push('/article')
+    },
+    // 修改
+    async edit (draft) {
+      await this.axios.put(`articles/${this.articleId}?draft=${draft}`, this.articleForm)
+      this.$message.success(draft ? '修改成功' : '修改草稿成功')
+      this.$router.push('/article')
     }
+
   }
 }
 </script>
 
 <style scoped lang='less'>
-.img-btn {
-  width: 150px;
-  height: 150px;
-  border: 1px dashed #ddd;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
+
 </style>
