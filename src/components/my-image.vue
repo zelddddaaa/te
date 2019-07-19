@@ -25,6 +25,16 @@
           >
             <img :src="item.url" alt="">
           </div>
+          <!-- 分页 -->
+          <el-pagination
+          v-if="total>reqParams.per_page"
+          background
+          layout="prev,pager,next"
+          :total="total"
+          :page-size="reqParams.per_page"
+          :current-page="reqParams.page"
+          @current-change="pager"
+          ></el-pagination>
         </el-tab-pane>
         <el-tab-pane label="上传图片" name="upload"></el-tab-pane>
       </el-tabs>
@@ -55,7 +65,9 @@ export default {
       selectedImageUrl: null,
       // 提交后台数据
       reqParams: {
+        // 默认全部
         collect: false,
+        // 分页
         page: 1,
         per_page: 8
       }
@@ -78,6 +90,11 @@ export default {
     // 图片对号,排他
     selectedImage (url) {
       this.selectedImageUrl = url
+    },
+    // 分页换页
+    pager (newPage) {
+      this.reqParams.page = newPage
+      this.getImages()
     }
   }
 }
