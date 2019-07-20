@@ -15,7 +15,8 @@ import article from '@/views/article'
 import images from '@/views/images'
 // 引入publish子路由组件
 import publish from '@/views/publish'
-
+// 引入comment子路由组件
+import comment from '@/views/comment'
 vue.use(VueRouter)
 // 创建路由对象
 const router = new VueRouter({
@@ -45,6 +46,11 @@ const router = new VueRouter({
       name: 'publish',
       path: '/publish',
       component: publish
+    },
+    {
+      name: 'comment',
+      path: '/comment',
+      component: comment
     }
     ]
   },
