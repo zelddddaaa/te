@@ -84,6 +84,7 @@ export default {
     toggleStatus (row) {
       const text1 = '确认打开评论'
       const text2 = '确认关闭评论'
+      // 三元运算符
       this.$confirm(row.comment_status ? text2 : text1, '提示', {
         onfirmButtonText: '确定',
         cancelButtonText: '取消',

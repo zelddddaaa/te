@@ -17,6 +17,10 @@ import images from '@/views/images'
 import publish from '@/views/publish'
 // 引入comment子路由组件
 import comment from '@/views/comment'
+// 引入setting子路由组件
+import setting from '@/views/setting'
+// 引入fans子路由组件
+import fans from '@/views/fans'
 vue.use(VueRouter)
 // 创建路由对象
 const router = new VueRouter({
@@ -51,6 +55,16 @@ const router = new VueRouter({
       name: 'comment',
       path: '/comment',
       component: comment
+    },
+    {
+      name: 'setting',
+      path: '/setting',
+      component: setting
+    },
+    {
+      name: 'fans',
+      path: '/fans',
+      component: fans
     }
     ]
   },

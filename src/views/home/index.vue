@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import eventBus from '@/eventBus'
 export default {
   data () {
     return {
@@ -103,6 +104,14 @@ export default {
     const user = JSON.parse(window.sessionStorage.getItem('te'))
     this.avatar = user.photo
     this.name = user.name
+    // 绑定setting组件上传图片的事件,完成非父子组价传值
+    eventBus.$on('updateHeaderPhoto', (url) => {
+      this.avatar = url
+    })
+    // 绑定setting组价修改用户名
+    eventBus.$on('updateHeaderName', (name) => {
+      this.name = name
+    })
   }
 }
 </script>
