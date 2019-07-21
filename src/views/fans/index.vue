@@ -8,7 +8,8 @@
       <!-- tab栏 -->
       <el-tabs type="card" v-model="activeName">
         <el-tab-pane label="粉丝列表" name="list">
-          <div class="fans-item" v-for="item in fans" :key="item.id">
+          <!-- item.id是Bignumber的构造函数,转化成vue可以识别的字符串 -->
+          <div class="fans-item" v-for="item in fans" :key="item.id.toString()">
             <!-- 图片 -->
             <el-avatar :size="80" :src="item.photo"></el-avatar>
             <!-- 名字 -->
@@ -68,6 +69,7 @@ export default {
       } = await this.axios.get('followers', { params: this.reqParams })
       // 粉丝信息
       this.fans = data.results
+      console.log(data)
       this.total = data.total_count
     },
     // 分页

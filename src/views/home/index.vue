@@ -100,7 +100,7 @@ export default {
     }
   },
   created () {
-    // 不能是用逗号分隔
+    // 不能是用逗号分隔,从本地获取信息
     const user = JSON.parse(window.sessionStorage.getItem('te'))
     this.avatar = user.photo
     this.name = user.name
